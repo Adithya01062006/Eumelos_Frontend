@@ -1,0 +1,209 @@
+.admin-home {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.admin-banner {
+  padding: 2.5rem 3rem;
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.1), rgba(239, 68, 68, 0.1));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-left: 4px solid #eab308;
+}
+
+.admin-banner h1 {
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, #facc15, #f87171);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.admin-banner p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.banner-icon {
+  font-size: 4rem;
+  opacity: 0.8;
+  animation: spinSlow 10s linear infinite;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.admin-stat-card {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s;
+}
+
+.admin-stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.stat-header h3 {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-icon {
+  font-size: 1.5rem;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.users-icon {
+  background: rgba(59, 130, 246, 0.15);
+}
+
+.catalog-icon {
+  background: rgba(16, 185, 129, 0.15);
+}
+
+.status-icon {
+  background: rgba(234, 179, 8, 0.15);
+}
+
+.admin-stat-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1;
+  margin-bottom: 1.5rem;
+}
+
+.text-success {
+  color: #34d399;
+}
+
+.stat-link {
+  margin-top: auto;
+  font-size: 0.9rem;
+  color: #eab308;
+  font-weight: 500;
+}
+
+.stat-link:hover {
+  color: #facc15;
+}
+
+.quiet-link {
+  color: var(--text-muted);
+}
+
+.quiet-link:hover {
+  color: var(--text-muted);
+  text-decoration: none;
+  cursor: default;
+}
+
+/* Courses Table Section */
+.admin-courses-section {
+  padding: 1.75rem;
+  margin-top: 1rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.btn-primary-sm {
+  background: #3b82f6;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn-primary-sm:hover {
+  background: #2563eb;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.courses-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.courses-table th, .courses-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.courses-table th {
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+.badge-days {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.85rem;
+}
+
+.btn-delete-course {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  padding: 0.4rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.btn-delete-course:hover:not(:disabled) {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-delete-course:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

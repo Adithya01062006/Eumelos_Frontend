@@ -1,0 +1,76 @@
+.my-courses-page {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.enrolled-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.enrolled-card {
+  padding: 1.5rem 2rem;
+  border-left: 4px solid #10b981; /* Success green accent */
+  transition: transform 0.2s;
+}
+
+.enrolled-card:hover {
+  transform: translateX(5px);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 1rem;
+}
+
+.card-top h3 {
+  font-size: 1.25rem;
+  color: var(--text-main);
+}
+
+.status-badge {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.info-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.info-group .label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.info-group .value {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #e2e8f0;
+}
+
+@media (max-width: 768px) {
+  .card-body {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

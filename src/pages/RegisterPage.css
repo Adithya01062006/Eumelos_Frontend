@@ -1,0 +1,27 @@
+.register-card {
+  width: 100%;
+  max-width: 550px; /* wider for split form */
+  padding: 2.5rem 2rem;
+  text-align: center;
+  animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.split-form {
+  gap: 1.25rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+}

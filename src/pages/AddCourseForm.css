@@ -1,0 +1,86 @@
+.add-course-page {
+  animation: fadeIn 0.4s ease-out;
+  max-width: 800px;
+}
+
+.form-container {
+  padding: 2.5rem;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.feedback-banner {
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.feedback-banner.error {
+  background: rgba(239, 68, 68, 0.15);
+  border-left: 4px solid #ef4444;
+  color: #fca5a5;
+}
+
+.feedback-banner.success {
+  background: rgba(16, 185, 129, 0.15);
+  border-left: 4px solid #10b981;
+  color: #34d399;
+}
+
+.input-hint {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.admin-form .btn-primary {
+  margin-top: 1rem;
+  background: linear-gradient(135deg, #eab308, #ef4444);
+  align-self: flex-start;
+  min-width: 200px;
+}
+
+.admin-form .btn-primary:hover {
+  background: linear-gradient(135deg, #facc15, #f87171);
+  box-shadow: 0 4px 15px rgba(234, 179, 8, 0.4);
+}
+
+/* Days Toggle Group */
+.days-toggle-group {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.day-toggle-btn {
+  flex: 1;
+  min-width: 45px;
+  padding: 0.6rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.day-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+}
+
+.day-toggle-btn.active {
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+}
