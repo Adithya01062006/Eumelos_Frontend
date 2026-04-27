@@ -1,0 +1,119 @@
+.timetable-page {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.timetable-grid {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.timetable-header {
+  display: flex;
+  background: rgba(15, 23, 42, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.time-col, .day-col, .time-header-col, .day-name-col {
+  flex: 1;
+  padding: 1rem;
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.day-name-col, .day-label-cell {
+  flex: 0 0 120px;
+  border-right: 2px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.8);
+}
+
+.day-label-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #f8fafc;
+  font-size: 0.9rem;
+}
+
+.time-header-col {
+  flex: 0 0 120px;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.timetable-grid.horizontal-layout {
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.timetable-grid.horizontal-layout .timetable-header,
+.timetable-grid.horizontal-layout .timetable-row {
+  display: flex;
+  width: max-content;
+  min-width: 100%;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1); /* Horizontal lines between rows */
+}
+
+.timetable-grid.horizontal-layout .timetable-row:last-child {
+  border-bottom: none;
+}
+
+.course-cell {
+  flex: 0 0 120px;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0.75rem;
+  min-height: 110px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.scheduled-course {
+  background: rgba(245, 197, 24, 0.1);
+  border-left: 3px solid #f5c518;
+  padding: 0.75rem;
+  border-radius: 4px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.scheduled-course:hover {
+  transform: scale(1.02);
+  background: rgba(245, 197, 24, 0.18);
+}
+
+.scheduled-course .course-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #f5c518;
+  line-height: 1.2;
+}
+
+.scheduled-course .course-time {
+  font-size: 0.75rem;
+  color: #38bdf8;
+}
+
+.empty-cell {
+  height: 100%;
+}
+
+@media (max-width: 900px) {
+  .timetable-grid {
+    overflow-x: auto;
+  }
+  .timetable-header, .timetable-row {
+    min-width: 800px;
+  }
+}

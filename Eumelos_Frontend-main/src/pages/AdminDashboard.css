@@ -1,0 +1,36 @@
+/* Imports the layout conceptually handled by StudentDashboard's external classes, but overwriting specifics. */
+@import './StudentDashboard.css';
+
+.admin-layout .admin-sidebar {
+  border-right: 1px solid rgba(234, 179, 8, 0.2);
+}
+
+.admin-badge {
+  background: rgba(234, 179, 8, 0.2);
+  color: #facc15;
+}
+
+.admin-sidebar .sidebar-header h2 {
+  background: linear-gradient(135deg, #facc15, #f87171);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.admin-sidebar .active-link {
+  background: linear-gradient(90deg, rgba(234, 179, 8, 0.15), transparent);
+  color: #facc15;
+  border-left: 3px solid #eab308;
+}
+
+.admin-sidebar .nav-link:hover {
+  background: rgba(234, 179, 8, 0.05);
+}
+
+.admin-avatar {
+  background: linear-gradient(135deg, #eab308, #ef4444);
+  box-shadow: 0 2px 10px rgba(234, 179, 8, 0.3);
+}
+
+.admin-mobile-header {
+  border-bottom: 1px solid rgba(234, 179, 8, 0.2);
+}
