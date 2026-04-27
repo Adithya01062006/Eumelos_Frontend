@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
+import { useUser } from '../context/UserContext';
 import AdminHome from './AdminHome';
 import AddCourseForm from './AddCourseForm';
 import AdminStudents from './AdminStudents';
@@ -8,9 +9,11 @@ import './AdminDashboard.css';
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user, logout } = useUser();
+  const adminName = user ? user.name : 'Admin';
 
   const handleLogout = () => {
-    localStorage.clear();
+    logout();
     navigate('/login');
   };
 
@@ -22,7 +25,7 @@ const AdminDashboard = () => {
     <div className="dashboard-layout admin-layout">
       <aside className="dashboard-sidebar glass-panel admin-sidebar">
         <div className="sidebar-header">
-          <h2>UniSched</h2>
+          <h2>Eumelos</h2>
           <span className="role-badge admin-badge">Admin</span>
         </div>
 
@@ -40,9 +43,9 @@ const AdminDashboard = () => {
 
         <div className="sidebar-footer">
           <div className="user-profile">
-            <div className="avatar admin-avatar">A</div>
+            <div className="avatar admin-avatar">{adminName.charAt(0).toUpperCase()}</div>
             <div className="user-info">
-              <span className="name-text">Administrator</span>
+              <span className="name-text">{adminName}</span>
             </div>
           </div>
           <button onClick={handleLogout} className="btn-logout">Logout</button>
@@ -51,7 +54,7 @@ const AdminDashboard = () => {
 
       <main className="dashboard-main">
         <header className="mobile-header glass-panel admin-mobile-header">
-          <h2>UniSched Admin</h2>
+          <h2>Eumelos Admin</h2>
         </header>
         <div className="content-area">
           <Routes>

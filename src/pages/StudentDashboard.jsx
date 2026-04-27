@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
+import { useUser } from '../context/UserContext';
 import DashboardHome from './DashboardHome';
 import AvailableCourses from './AvailableCourses';
 import MyCourses from './MyCourses';
@@ -9,10 +10,11 @@ import './StudentDashboard.css';
 const StudentDashboard = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const studentName = localStorage.getItem('studentName') || 'Student';
+  const { user, logout } = useUser();
+  const studentName = user ? user.name : 'Student';
 
   const handleLogout = () => {
-    localStorage.clear();
+    logout();
     navigate('/login');
   };
 
@@ -22,10 +24,9 @@ const StudentDashboard = () => {
 
   return (
     <div className="dashboard-layout">
-      {/* Sidebar Overlay for Mobile */}
       <aside className="dashboard-sidebar glass-panel">
         <div className="sidebar-header">
-          <h2>UniSched</h2>
+          <h2>Eumelos</h2>
           <span className="role-badge">Student</span>
         </div>
 
@@ -57,7 +58,7 @@ const StudentDashboard = () => {
 
       <main className="dashboard-main">
         <header className="mobile-header glass-panel">
-          <h2>UniSched</h2>
+          <h2>Eumelos</h2>
         </header>
         <div className="content-area">
           <Routes>

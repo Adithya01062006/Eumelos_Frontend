@@ -1,21 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { loginStudent, loginAdmin } from '../api';
+import { useUser } from '../context/UserContext';
 import './LoginPage.css';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('student'); // 'student' or 'admin'
+  const [role, setRole] = useState('student');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [captcha, setCaptcha] = useState('');
+  const [captchaInput, setCaptchaInput] = useState('');
   const navigate = useNavigate();
+  const { login, user } = useUser();
+
+  const fetchCaptcha = () => {
+    setCaptcha(String(Math.floor(Math.random() * 9000) + 1000));
+    setCaptchaInput('');
+  };
+
+  useEffect(() => {
+    // Check for OAuth2 redirect params in URL first
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    const role = params.get('role');
+
+    if (token) {
+      login(token).then(() => {
+        window.history.replaceState({}, '', '/login');
+        navigate(role === 'admin' ? '/admin' : '/student');
+      });
+      return;
+    }
+
+    // If already logged in, redirect
+    if (user) {
+      navigate(user.role === 'ADMIN' ? '/admin' : '/student');
+    }
+
+    fetchCaptcha();
+  }, [user, navigate, login]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
-    setLoading(true);
 
+    if (!captchaInput) {
+      setError('Please enter the captcha.');
+      return;
+    }
+
+    // Verify captcha first
+    if (captchaInput !== captcha) {
+      setError('Incorrect captcha. Try again.');
+      fetchCaptcha();
+      return;
+    }
+
+    setLoading(true);
     try {
       let result;
       if (role === 'student') {
@@ -24,46 +67,28 @@ const LoginPage = () => {
         result = await loginAdmin(email, password);
       }
 
-      if (result.success || result.id || result.studentId) {
-        // Backend returns: success, message, id, name, role
-        localStorage.setItem("isLoggedIn", "true");
-        
-        // Use backend role if provided, otherwise fallback to local selection
-        const userRole = result.role ? result.role.toLowerCase() : role;
-        const userId = result.id || result.studentId || 1;
-        const userName = result.name || (userRole === 'admin' ? "Administrator" : "Student");
-
-        localStorage.setItem("userRole", userRole);
-        localStorage.setItem("userId", userId);
-        
-        // Keep studentId for backward compatibility if other pages use it specifically
-        if (userRole === 'student') {
-          localStorage.setItem("studentId", userId);
-          localStorage.setItem("studentName", userName);
-        } else {
-          localStorage.setItem("adminId", userId);
-          localStorage.setItem("adminName", userName);
-        }
-
-        if (userRole === 'admin') {
-          navigate('/admin');
-        } else {
-          navigate('/student');
-        }
+      if (result.success && result.token) {
+        await login(result.token);
       } else {
         setError(result.message || 'Invalid credentials');
+        fetchCaptcha();
       }
     } catch (err) {
       setError('Failed to connect to server. Check your backend server.');
+      fetchCaptcha();
     } finally {
       setLoading(false);
     }
   };
 
+  const handleGoogleLogin = () => {
+    window.location.href = 'http://localhost:8080/oauth2/authorization/google';
+  };
+
   return (
     <div className="auth-container">
       <div className="glass-panel auth-card">
-        <h1 className="auth-title">UniSched</h1>
+        <h1 className="auth-title">Eumelos</h1>
         <p className="auth-subtitle">Sign in to manage your timetable</p>
 
         {error && <div className="error-message">{error}</div>}
@@ -106,15 +131,38 @@ const LoginPage = () => {
             />
           </div>
 
+          <div className="form-group captcha-group">
+            <label>Enter Captcha</label>
+            <div className="captcha-display">
+              <span className="captcha-code">{captcha}</span>
+              <button type="button" onClick={fetchCaptcha} className="captcha-refresh">↻</button>
+            </div>
+            <input
+              type="text"
+              value={captchaInput}
+              onChange={(e) => setCaptchaInput(e.target.value)}
+              placeholder="Enter the 4-digit code"
+              maxLength={4}
+              required
+            />
+          </div>
+
           <button type="submit" className="btn-primary auth-submit" disabled={loading}>
             {loading ? 'Signing in...' : `Sign In as ${role === 'student' ? 'Student' : 'Admin'}`}
           </button>
         </form>
 
+        <div className="auth-divider">
+          <span>OR</span>
+        </div>
+
+        <button onClick={handleGoogleLogin} className="google-login-btn">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" />
+          Sign in with Google
+        </button>
+
         <div className="auth-footer">
-          {role === 'student' && (
-            <p>Don't have an account? <Link to="/register">Register here</Link></p>
-          )}
+          <p>Don't have an account? <Link to={role === 'admin' ? '/register-admin' : '/register'}>{role === 'admin' ? 'Register as Admin' : 'Register here'}</Link></p>
           <p className="docs-link"><Link to="/api-docs">View API Documentation</Link></p>
         </div>
       </div>

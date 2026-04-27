@@ -42,10 +42,10 @@ const RegisterPage = () => {
       if (result.id) {
         navigate('/login');
       } else {
-        setError('Registration failed. Try again.');
+        setError(result.message || 'Registration failed. Try again.');
       }
     } catch (err) {
-      setError('Failed to connect to server. Check backend connection.');
+      setError(err.message || 'Failed to connect to server. Check backend connection.');
     } finally {
       setLoading(false);
     }
@@ -55,7 +55,7 @@ const RegisterPage = () => {
     <div className="auth-container">
       <div className="glass-panel register-card">
         <h1 className="auth-title">Create Account</h1>
-        <p className="auth-subtitle">Join UniSched to manage your classes</p>
+        <p className="auth-subtitle">Join Eumelos to manage your classes</p>
 
         {error && <div className="error-message">{error}</div>}
 

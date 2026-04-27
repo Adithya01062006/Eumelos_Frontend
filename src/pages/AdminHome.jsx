@@ -49,7 +49,7 @@ const AdminHome = () => {
       <div className="admin-banner glass-panel">
         <div className="banner-content">
           <h1>Admin Overview</h1>
-          <p>System statistics and quick actions to manage UniSched.</p>
+          <p>System statistics and quick actions to manage Eumelos.</p>
         </div>
         <div className="banner-icon">⚙️</div>
       </div>
